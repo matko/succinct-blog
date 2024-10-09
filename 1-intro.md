@@ -72,7 +72,7 @@ express to 127).
 
 To be honest, I don't remember why we decided to call it a
 logarray. This might be directly lifted from one of the HDT papers.
-Maybe it relates to how the amount of bits you need is a 2-log
+Maybe it relates to how the amount of bits you need is a log2
 (rounded up) of the exclusive upper bound. Whatever the case, this is
 what I'll keep calling it.
 
@@ -168,18 +168,19 @@ overhead adds a lot of processing time that is therefore not going
 into actually working out the problem itself.
 
 ### Library support
-It is a plain fact that there's a wide variety of libraries out there
-that will happily take a slice of memory to work on, but won't take
-some weird custom logarray type. For example, the rust standard
-library comes with two different sorting algorithms (timsort and
-pdqsort), which operate on memory slices, but simply won't work on
-collection types that operate differently.
+There's a wide variety of libraries out there that will happily take a
+slice of memory to work on, but won't take some weird custom logarray
+type. For example, the rust standard library comes with two different
+sorting algorithms (timsort and pdqsort), which operate on memory
+slices, but simply won't work on collection types that operate
+differently.
 
 Having your data as a plain slice of memory pretty much guarantees
-easy interopability. While in the long run anything can be
-reimplemented, losing out on a lot of functionality that is regularly
-taken for granted is a significant cost to any software development
-project.
+easy interopability, and moving away from plain slices of memory means
+losing out on a lot of functionality you'd otherwise get out of the
+box. While in the long run anything can be reimplemented, losing out
+on a lot of functionality that is regularly taken for granted is a
+significant cost to any software development project.
 
 ## Evaluation of the logarray
 In terms of the type of algorithms theoretically possible, there is
@@ -239,7 +240,7 @@ Now that we got a clearer understanding of succinct data structures,
 what they're good for, and what tradeoff is being made, we are ready
 to look at some low-level details.
 
-In the next post in this series, we'll explore various succinct data
+In the next posts in this series, we'll explore various succinct data
 structures, some quirks around their implementation, and ways to
 combine them into composite data structures. Probably we'll even
 implement some custom graph format at some point!
